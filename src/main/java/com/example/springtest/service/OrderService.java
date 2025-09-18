@@ -49,7 +49,8 @@ public class OrderService {
                 .quantity(quantity)
                 .totalPrice(quantity * book.getPrice())
                 .build();
-        return orderRepository.save(order);
+        orderRepository.save(order);
+        return order;
     }
 
     //huy đơn

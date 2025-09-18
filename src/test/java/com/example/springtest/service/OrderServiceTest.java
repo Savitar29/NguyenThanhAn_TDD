@@ -100,8 +100,6 @@ public class OrderServiceTest {
         Order actual = orderService.makeOrder(userEmail, bookId, quantity);
 
         assertEquals(expected, actual);
-
-
     }
 
     @Test

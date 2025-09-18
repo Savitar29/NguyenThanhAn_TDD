@@ -28,7 +28,7 @@ public class UserControllerTest {
 
     @Test
     void should_return_access_token_after_successfully_login() throws Exception {
-        String email = "xuanthangsn@gmail.com";
+        String email = "savitar@gmail.com";
         String password = "password";
         LoginRequest loginRequest = LoginRequest.builder().email(email).password(password).build();
 
@@ -47,7 +47,7 @@ public class UserControllerTest {
 
     @Test
     void should_return_401_error_if_email_or_password_is_invalid() throws Exception {
-        String email = "xuanthangsn@gmail.com";
+        String email = "savitar@gmail.com";
         String password = "password";
         LoginRequest loginRequest = LoginRequest.builder().email(email).password(password).build();
 

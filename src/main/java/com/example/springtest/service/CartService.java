@@ -41,6 +41,7 @@ public class CartService {
 
             if (quantity > book.getStockQuantity()) {
                 cartItem.setQuantity(book.getStockQuantity()); // chỉnh lại số lượng = toofn kho
+                throw new IllegalArgumentException("Số lượng lớn hơn số lương tồn kho");
             }
         }
 
