@@ -7,6 +7,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,5 +63,31 @@ public class UserServiceTest {
         when(repository.findByEmail(email)).thenReturn(User.builder().email(email).password(password).build());
         String result = userService.login(email, password);
         assertEquals(expectedOutput, result);
+    }
+
+    @Test
+    public void should_return_false_if_not_logged_in() {
+        // Tạo request không có session
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        ServletRequestAttributes attributes = new ServletRequestAttributes(request);
+        RequestContextHolder.setRequestAttributes(attributes);
+
+        boolean result = userService.checkLoginStatus();
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void should_return_true_if_logged_in() {
+        // Tạo session với loggedInUser
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("loggedInUser", "savitar@gmail.com");
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setSession(session);
+        ServletRequestAttributes attributes = new ServletRequestAttributes(request);
+        RequestContextHolder.setRequestAttributes(attributes);
+
+        boolean result = userService.checkLoginStatus();
+        assertEquals(true, result);
     }
 }

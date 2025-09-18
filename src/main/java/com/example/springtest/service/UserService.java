@@ -14,18 +14,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    //    public boolean checkLoginStatus() {
-//        HttpSession session = ((ServletRequestAttributes)
-//                RequestContextHolder.currentRequestAttributes())
-//                .getRequest()
-//                .getSession(false);
-//
-//        if (session == null) return false;
-//
-//        session.setMaxInactiveInterval(30 * 60);
-//
-//        return session.getAttribute("loggedInUser") != null;
-//    }
+    public boolean checkLoginStatus() {
+        HttpSession session = ((ServletRequestAttributes)
+                RequestContextHolder.currentRequestAttributes())
+                .getRequest()
+                .getSession(false);
+
+        if (session == null) return false;
+
+        session.setMaxInactiveInterval(30 * 60);
+
+        return session.getAttribute("loggedInUser") != null;
+    }
 
 
     // return access token if successfully logged in, otherwise throws an error
